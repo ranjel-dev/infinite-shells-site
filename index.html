@@ -1,1 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – Infinite Shells</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --navy:       #090f20;
+      --navy-mid:   #0d1730;
+      --navy-card:  #111e36;
+      --gold:       #f2d96b;
+      --gold-dim:   #c9a93a;
+      --teal:       #00c8b0;
+      --teal-dim:   #009e8c;
+      --blue-glow:  rgba(0, 120, 200, 0.18);
+      --teal-glow:  rgba(0, 180, 160, 0.10);
+      --text:       #d8e4f0;
+      --text-muted: #7a94b0;
+      --border:     rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--text);
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background glows ── */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      width: 600px; height: 600px;
+      top: -180px; left: -120px;
+      background: var(--blue-glow);
+      filter: blur(90px);
+    }
+    body::after {
+      width: 500px; height: 500px;
+      bottom: -160px; right: -100px;
+      background: var(--teal-glow);
+      filter: blur(80px);
+    }
+
+    /* ── Layout ── */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 60px 0 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    .game-title {
+      font-size: clamp(28px, 6vw, 46px);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-shadow: 0 0 28px rgba(242, 217, 107, 0.35);
+      margin-bottom: 6px;
+    }
+
+    .game-subtitle {
+      font-size: clamp(13px, 2.5vw, 15px);
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0, 200, 176, 0.12);
+      border: 1px solid rgba(0, 200, 176, 0.3);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    /* ── Nav tabs ── */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 8px 22px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .nav-tab.active, .nav-tab:hover {
+      background: rgba(242, 217, 107, 0.12);
+      border-color: rgba(242, 217, 107, 0.4);
+      color: var(--gold);
+    }
+
+    .nav-tab:not(.active) {
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: rgba(255,255,255,0.13); }
+
+    /* ── Effective date bar ── */
+    .effective-bar {
+      background: rgba(0, 200, 176, 0.08);
+      border: 1px solid rgba(0, 200, 176, 0.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 13px;
+      color: var(--teal);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .effective-bar span { color: var(--text-muted); }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: clamp(16px, 3vw, 19px);
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--teal);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Body text ── */
+    p {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Lists ── */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+    }
+
+    ul li {
+      padding: 6px 0 6px 22px;
+      font-size: 15px;
+      color: var(--text);
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: "›";
+      position: absolute;
+      left: 4px;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: rgba(242, 217, 107, 0.06);
+      border-left: 3px solid var(--gold-dim);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .highlight-box a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .highlight-box a:hover { text-decoration: underline; }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: linear-gradient(135deg,
+        rgba(0,200,176,0.08) 0%,
+        rgba(0,100,200,0.08) 100%);
+      border: 1px solid rgba(0,200,176,0.25);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .contact-card h2 { justify-content: center; }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 28px;
+      background: rgba(0,200,176,0.12);
+      border: 1px solid rgba(0,200,176,0.35);
+      border-radius: 24px;
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-email:hover {
+      background: rgba(0,200,176,0.22);
+      transform: translateY(-1px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    .footer-logo {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+
+    .footer-studio {
+      font-size: 13px;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Page sections (for tab switching) ── */
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      .card, .contact-card { padding: 22px 18px; }
+      header { padding: 40px 0 28px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="game-title">INFINITE SHELLS</div>
+    <div class="game-subtitle">Legal &amp; Information</div>
+    <div class="badge">Nocturnal Studios</div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav-tabs">
+    <a class="nav-tab active" href="#" onclick="showTab('privacy', this); return false;">Privacy Policy</a>
+    <a class="nav-tab" href="#" onclick="showTab('terms', this); return false;">Terms of Use</a>
+  </nav>
+
+  <!-- ══ PRIVACY POLICY ══ -->
+  <section class="page-section active" id="privacy">
+
+    <div class="effective-bar">
+      🛡️ Effective Date: <span>April 13, 2025 &nbsp;·&nbsp; Last updated: April 13, 2025</span>
+    </div>
+
+    <div class="card">
+      <h2>Overview</h2>
+      <p>
+        Infinite Shells is developed by Nocturnal Studios. This Privacy Policy explains how
+        we handle information when you play Infinite Shells on iOS.
+      </p>
+      <p>
+        We want to be completely transparent: <strong style="color:var(--teal)">Nocturnal Studios
+        will never personally collect, store, sell, or use your data for any purpose —
+        business or personal.</strong> We have no backend servers, no databases, and no
+        access to who you are as a player.
+      </p>
+      <div class="highlight-box">
+        Any data handling that occurs is done entirely by Apple (Game Center) and Google
+        (AdMob) under their own privacy policies, which we do not control. We are simply
+        the game developer — we never see or touch your data.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Information We Collect</h2>
+      <p>
+        <strong style="color:var(--teal)">Nocturnal Studios collects absolutely nothing from you directly.</strong>
+        We have no servers, no accounts, and no data pipeline of any kind.
+      </p>
+      <p>
+        The following data may be collected automatically by third-party services
+        embedded in the game — not by us:
+      </p>
+      <ul>
+        <li>Device type, operating system version, and language settings <em style="color:var(--text-muted)">(Google AdMob)</em></li>
+        <li>Advertising identifiers (IDFA) subject to your device's tracking preferences <em style="color:var(--text-muted)">(Google AdMob)</em></li>
+        <li>Game Center alias and leaderboard scores <em style="color:var(--text-muted)">(Apple Game Center)</em></li>
+        <li>Crash reports and performance diagnostics <em style="color:var(--text-muted)">(Apple)</em></li>
+      </ul>
+      <div class="highlight-box">
+        We never collect your name, email address, location, payment info, or any
+        personally identifiable information — ever, under any circumstances.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Third-Party Services</h2>
+      <p>Infinite Shells uses the following third-party services that may collect data
+         according to their own privacy policies:</p>
+      <ul>
+        <li>
+          <strong>Google AdMob</strong> — serves in-game advertisements.
+          <div class="highlight-box">
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
+              Google Privacy Policy →
+            </a>
+          </div>
+        </li>
+        <li>
+          <strong>Apple Game Center</strong> — powers global leaderboards and score tracking.
+          <div class="highlight-box">
+            <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">
+              Apple Privacy Policy →
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Advertising &amp; Tracking</h2>
+      <p>
+        Infinite Shells displays ads via Google AdMob. On iOS 14.5 and later, we request your
+        permission before allowing personalized advertising through Apple's App Tracking
+        Transparency (ATT) framework. You may decline tracking at any time and still use
+        the full game — non-personalized ads will be shown instead.
+      </p>
+      <p>
+        You can change your tracking preferences at any time in
+        <strong>iOS Settings → Privacy &amp; Security → Tracking</strong>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>How We Use Data</h2>
+      <p>
+        <strong style="color:var(--teal)">Nocturnal Studios does not use your data for
+        any purpose — personal or business.</strong> We simply do not have access to it.
+      </p>
+      <p>
+        Data collected by third-party services (Google AdMob, Apple) is used by those
+        services solely to:
+      </p>
+      <ul>
+        <li>Display advertisements to support free gameplay <em style="color:var(--text-muted)">(Google AdMob)</em></li>
+        <li>Maintain global leaderboard rankings <em style="color:var(--text-muted)">(Apple Game Center)</em></li>
+        <li>Deliver crash reports and diagnostics to help us fix bugs <em style="color:var(--text-muted)">(Apple)</em></li>
+      </ul>
+      <div class="highlight-box">
+        Nocturnal Studios will never sell, rent, trade, or profit from your data in
+        any way — now or in the future. This is a firm commitment, not a legal formality.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Children's Privacy</h2>
+      <p>
+        Infinite Shells is not directed at children under the age of 13. We do not knowingly
+        collect personal data from children. If you believe a child under 13 has provided
+        personal information through our game, please contact us immediately at
+        <a href="mailto:ranjel@me.com" style="color:var(--teal);font-weight:600;">ranjel@me.com</a>
+        and we will take steps to delete that information.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Data Retention &amp; Deletion</h2>
+      <p>
+        We do not store personal data on our own servers. Any data retained by third-party
+        services (Google AdMob, Apple Game Center) is subject to their own retention
+        policies. You can request deletion of Game Center data through your Apple ID settings.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Your Rights</h2>
+      <p>Depending on your region, you may have the right to:</p>
+      <ul>
+        <li>Access the personal data held about you by third-party services</li>
+        <li>Request correction or deletion of your data</li>
+        <li>Opt out of personalized advertising at the device level</li>
+        <li>Withdraw consent for tracking via iOS Settings at any time</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Any changes will be posted
+        on this page with an updated effective date. Continued use of the game after
+        changes are posted constitutes your acceptance of the revised policy.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ══ TERMS OF USE ══ -->
+  <section class="page-section" id="terms">
+
+    <div class="effective-bar">
+      📋 Effective Date: <span>April 13, 2025 &nbsp;·&nbsp; Last updated: April 13, 2025</span>
+    </div>
+
+    <div class="card">
+      <h2>Agreement</h2>
+      <p>
+        By downloading or playing Infinite Shells, you agree to these Terms of Use.
+        If you do not agree, please do not use the game. These terms apply to all
+        users of Infinite Shells on iOS.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>License</h2>
+      <p>
+        Nocturnal Studios grants you a limited, non-exclusive,
+        non-transferable, revocable license to use Infinite Shells for personal,
+        non-commercial entertainment purposes only.
+      </p>
+      <div class="highlight-box">
+        You may not copy, modify, distribute, sell, or reverse engineer any part
+        of this game.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>In-App Advertising</h2>
+      <p>
+        Infinite Shells is free to play and supported by advertising. Ads are served
+        by Google AdMob. By using the game you acknowledge that ads will be displayed
+        during gameplay, including between rounds and on the Game Over screen.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>User Conduct</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Cheat, exploit bugs, or use third-party software to manipulate the game</li>
+        <li>Attempt to access or interfere with the game's backend systems</li>
+        <li>Submit false scores to Game Center leaderboards</li>
+        <li>Use the game for any unlawful purpose</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Intellectual Property</h2>
+      <p>
+        All content in Infinite Shells — including graphics, sounds, code, and design —
+        is the property of Nocturnal Studios and is protected by copyright law.
+        The name "Infinite Shells" and associated branding are owned by Nocturnal Studios.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Disclaimer of Warranties</h2>
+      <p>
+        Infinite Shells is provided "as is" without warranties of any kind. We do not
+        guarantee that the game will be error-free, uninterrupted, or free of viruses.
+        Your use of the game is at your own risk.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Limitation of Liability</h2>
+      <p>
+        To the fullest extent permitted by law, Nocturnal Studios shall not be liable
+        for any indirect, incidental, or consequential damages arising from your use
+        of, or inability to use, Infinite Shells.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Responsible Gaming</h2>
+      <p>
+        Infinite Shells is designed to be an engaging reflex and skill game. Please
+        take regular breaks and be mindful of your screen time. The game is intended
+        for entertainment purposes only.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Governing Law</h2>
+      <p>
+        These Terms are governed by the laws of the State of Florida, United States,
+        without regard to its conflict of law provisions.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Changes to Terms</h2>
+      <p>
+        We reserve the right to update these Terms at any time. Continued use of
+        the game after changes are posted means you accept the revised Terms.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Contact -->
+  <div class="contact-card">
+    <h2>Contact Us</h2>
+    <p style="color:var(--text-muted); font-size:14px; margin-top:8px;">
+      Questions about our privacy practices or terms? We're happy to help.
+    </p>
+    <a class="contact-email" href="mailto:ranjel@me.com">ranjel@me.com</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">INFINITE SHELLS</div>
+    <div class="footer-studio">Nocturnal Studios</div>
+    <div class="footer-copy">© 2025 Nocturnal Studios. All rights reserved.</div>
+  </footer>
+
+</div>
+
+<script>
+  function showTab(id, el) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
